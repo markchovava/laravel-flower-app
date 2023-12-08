@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AppInfoController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +21,57 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/user', [UserController::class, 'index']);
+
+Route::prefix('app-info')->group(function() {
+    Route::get('/', [AppInfoController::class, 'index']);
+    Route::post('/', [AppInfoController::class, 'store']);
+    Route::put('/{id}', [AppInfoController::class, 'update']);
+});
+
+Route::prefix('permission')->group(function() {
+    Route::get('/', [PermissionController::class, 'index']);
+    Route::post('/', [PermissionController::class, 'store']);
+    Route::get('/search', [PermissionController::class, 'search']);
+    Route::get('/{id}', [PermissionController::class, 'show']);
+    Route::put('/{id}', [PermissionController::class, 'update']);
+    Route::delete('/{id}', [PermissionController::class, 'delete']);
+});
+
+Route::prefix('category')->group(function() {
+    Route::get('/', [CategoryController::class, 'index']);
+    Route::post('/', [CategoryController::class, 'store']);
+    Route::get('/search', [CategoryController::class, 'search']);
+    Route::get('/{id}', [CategoryController::class, 'show']);
+    Route::put('/{id}', [CategoryController::class, 'update']);
+    Route::delete('/{id}', [CategoryController::class, 'delete']);
+});
+
+Route::prefix('user')->group(function() {
+    Route::get('/', [UserController::class, 'index']);
+    Route::post('/', [UserController::class, 'store']);
+    Route::get('/search', [UserController::class, 'search']);
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::put('/{id}', [UserController::class, 'update']);
+    Route::delete('/{id}', [UserController::class, 'delete']);
+});
+
+Route::prefix('product')->group(function() {
+    Route::get('/', [ProductController::class, 'index']);
+    Route::post('/', [ProductController::class, 'store']);
+    Route::get('/search', [ProductController::class, 'search']);
+    Route::get('/{id}', [ProductController::class, 'show']);
+    Route::put('/{id}', [ProductController::class, 'update']);
+    Route::delete('/{id}', [ProductController::class, 'delete']);
+});
+
+Route::prefix('cart')->group(function() {
+    Route::get('/', [CartController::class, 'index']);
+    Route::post('/', [CartController::class, 'store']);
+    Route::get('/search', [CartController::class, 'search']);
+    Route::get('/{id}', [CartController::class, 'show']);
+    Route::put('/{id}', [CartController::class, 'update']);
+    Route::delete('/{id}', [CartController::class, 'delete']);
 });

@@ -19,9 +19,27 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
         'email',
+        'phone',
+        'code',
         'password',
+        'access_level',
+        'address',
+        'city',
+        'country',
+        'delivery_phone',
+        'delivery_email',
+        'delivery_address',
+        'delivery_city',
+        'delivery_country',
+        'delivery_message',
     ];
+
+
+  
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +60,40 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function app_info(){
+        return $this->hasOne(AppInfo::class, 'user_id', 'id');     
+    }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class, 'user_permissions', 'user_id', 'permission_id')
+            ->withTimestamps();
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+    
+    public function order_items(){
+        return $this->hasMany(OrderItem::class, 'user_id', 'id');
+    }
+
+    public function carts(){
+        return $this->hasMany(Cart::class, 'user_id', 'id');
+    }
+
+    public function cart_items(){
+        return $this->hasMany(CartItem::class, 'user_id', 'id');
+    }
+
+    public function products(){
+        return $this->hasMany(Product::class, 'user_id', 'id');
+    }
+
+    public function categories(){
+        return $this->hasMany(Product::class, 'user_id', 'id');
+    }
+
+
 }
