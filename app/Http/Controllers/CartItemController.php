@@ -16,7 +16,6 @@ class CartItemController extends Controller
         return CartItemResource::collection($data);
     }
 
-
     public function search(Request $request){
         $search = $request->search;
         $data = CartItem::with(['user', 'cart', 'product'])
@@ -34,17 +33,18 @@ class CartItemController extends Controller
         return new CartItemResource($data);
     }
 
-
     public function update(Request $request, $id){
         $data = CartItem::find($id);
         //$data->cart_id = $request->cart_id;
         $data->user_id = $request->user_id;
         $data->product_id = $request->product_id;
         $data->product_name = $request->product_name;
+        $data->product_image = $request->product_image;
         $data->product_quantity = $request->product_quantity;
         $data->product_price = $request->product_price;
         $data->product_total = $request->product_total;
         $data->option_name = $request->option_name;
+        $data->option_price = $request->option_price;
         $data->option_quantity = $request->option_quantity;
         $data->option_total = $request->option_total;
         $data->updated_at = now();

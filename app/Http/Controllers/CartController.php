@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     public function index(){
-        $data = Cart::with(['user'])->order_by('created_at', 'desc')->paginate(20);
+        $data = Cart::with(['user'])
+                    ->order_by('created_at', 'desc')
+                    ->paginate(20);
 
         return CartResource::collection($data);
     }
@@ -53,10 +55,12 @@ class CartController extends Controller
                 $db_item->user_id = $item->user_id;
                 $db_item->product_id = $item->product_id;
                 $db_item->product_name = $item->product_name;
+                $db_item->product_image = $item->product_image;
                 $db_item->product_quantity = $item->product_quantity;
                 $db_item->product_price = $item->product_price;
                 $db_item->product_total = $item->product_total;
                 $db_item->option_name = $item->option_name;
+                $db_item->option_price = $item->option_price;
                 $db_item->option_quantity = $item->option_quantity;
                 $db_item->option_total = $item->option_total;
                 $db_item->updated_at = now();
@@ -93,10 +97,12 @@ class CartController extends Controller
                 $db_item->user_id = $item->user_id;
                 $db_item->product_id = $item->product_id;
                 $db_item->product_name = $item->product_name;
+                $db_item->product_image = $item->product_image;
                 $db_item->product_quantity = $item->product_quantity;
                 $db_item->product_price = $item->product_price;
                 $db_item->product_total = $item->product_total;
                 $db_item->option_name = $item->option_name;
+                $db_item->option_price = $item->option_price;
                 $db_item->option_quantity = $item->option_quantity;
                 $db_item->option_total = $item->option_total;
                 $db_item->updated_at = now();
@@ -121,4 +127,5 @@ class CartController extends Controller
             'message' => 'Deleted Sucessfully.'
         ]);
     }
+
 }

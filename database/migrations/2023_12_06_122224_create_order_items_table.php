@@ -17,8 +17,9 @@ return new class extends Migration
             $table->bigInteger('order_id')->nullable();
             $table->bigInteger('product_id')->nullable();
             $table->string('product_name')->nullable();
-            $table->integer('product_quantity')->nullable();
+            $table->string('product_image')->nullable();
             $table->integer('product_price')->nullable();
+            $table->integer('product_quantity')->nullable();
             $table->integer('product_total')->nullable();
             $table->string('option_name')->nullable();
             $table->integer('option_price')->nullable();

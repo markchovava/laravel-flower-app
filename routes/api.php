@@ -75,3 +75,30 @@ Route::prefix('cart')->group(function() {
     Route::put('/{id}', [CartController::class, 'update']);
     Route::delete('/{id}', [CartController::class, 'delete']);
 });
+
+Route::prefix('cart-item')->group(function() {
+    Route::get('/', [CartItemController::class, 'index']);
+    Route::post('/', [CartItemController::class, 'store']);
+    Route::get('/search', [CartItemController::class, 'search']);
+    Route::get('/{id}', [CartItemController::class, 'show']);
+    Route::put('/{id}', [CartItemController::class, 'update']);
+    Route::delete('/{id}', [CartItemController::class, 'delete']);
+});
+
+Route::prefix('order')->group(function() {
+    Route::get('/', [OrderController::class, 'index']);
+    Route::post('/', [OrderController::class, 'store']);
+    Route::get('/search', [OrderController::class, 'search']);
+    Route::get('/{id}', [OrderController::class, 'show']);
+    Route::put('/{id}', [OrderController::class, 'update']);
+    Route::put('/delivery_update/{id}', [OrderController::class, 'delivery_update']);
+    Route::delete('/{id}', [OrderController::class, 'delete']);
+});
+
+Route::prefix('order-item')->group(function() {
+    Route::get('/', [OrderController::class, 'index']);
+    Route::get('/search', [OrderController::class, 'search']);
+    Route::get('/{id}', [OrderController::class, 'show']);
+    Route::put('/{id}', [OrderController::class, 'update']);
+    Route::delete('/{id}', [OrderController::class, 'delete']);
+});
